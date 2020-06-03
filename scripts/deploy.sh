@@ -40,14 +40,11 @@ ORG_TARGET=$__ORG_TARGET_IT_RECT__
 #}
 
 #function __preExecute__  {
-	echo __execute__
 	time=$(date +%s%N)
 	echo $time
 	_f_="__preExecute__"
-	echo _f_	
-	curl -v -X DELETE -H "Authorization: token '$__TOKEN_GITHUB__'" "https://api.github.com/repos/${ORG_TARGET_IT_RECT}/${NEW_REPO_NAME}"
-	echo 21
-        curl -i -H "$__PREVIEW__" -H "$__JSON__" -H "Authorization: token $__TOKEN_GITHUB__" -d "$__BODY_KO__" https://api.github.com/repos/$__ORG_DEPLOY__/$FOLDER_URL
+	echo $_f_	
+	curl -v -X DELETE -H "Authorization: token $__TOKEN_GITHUB__" "https://api.github.com/repos/${ORG_TARGET_IT_RECT}/${NEW_REPO_NAME}"
 	echo -e " \e[42;1m Runtime ["$_f_"]: $(echo "scale=3;($(date +%s%N) -  ${time})/(1*10^09)" | bc) seconds"	
 #}
 
@@ -61,10 +58,10 @@ ORG_TARGET=$__ORG_TARGET_IT_RECT__
 	time=$(date +%s%N)
 	echo $time
 	_f_="__execute__"
-	echo _f_
+	echo $_f_
 	curl -i -H "$__PREVIEW__" -H "$__JSON__" -H "Authorization: token $__TOKEN_GITHUB__" -d "$__BODY_OK__" https://api.github.com/repos/$__ORG_DEPLOY__/$FOLDER_URL
 	echo 2
-	curl -v -H "Authorization: token '${__TOKEN_GITHUB__}'" https://api.github.com/orgs/${ORG_TARGET_IT_RECT}/repos -d '{"name": "'"${NEW_REPO_NAME}"'"}' 
+	curl -v -H "Authorization: token ${__TOKEN_GITHUB__}" https://api.github.com/orgs/${ORG_TARGET_IT_RECT}/repos -d '{"name": "'"${NEW_REPO_NAME}"'"}' 
 	echo 3
 	git clone ${URL_MASTER} 
 	echo 4
