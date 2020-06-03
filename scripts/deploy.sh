@@ -24,7 +24,7 @@ ORG_TARGET=$__ORG_TARGET_IT_RECT__
 # Muestra los valores que vienen como parámetros de la función
 #
 ####################################################
-function __debug__ {
+#function __debug__ {
 	echo "PRINT VALUES"
 	echo ""
 	echo -e "BASE_REPO_NAME:\t\t ${BASE_REPO_NAME}"
@@ -37,13 +37,26 @@ function __debug__ {
 	echo -e "FOLDER_URL:\t\t ${FOLDER_URL}"
  	echo -e "ORG_TARGET:\t\t ${ORG_TARGET}"
 	echo ""
-}
+#}
+
+#function __preExecute__  {
+	echo __execute__
+	time=$(date +%s%N)
+	echo $time
+	_f_="__preExecute__"
+	echo _f_	
+	curl -v -X DELETE -H "Authorization: token '$__TOKEN_GITHUB__'" "https://api.github.com/repos/${ORG_TARGET_IT_RECT}/${NEW_REPO_NAME}"
+	echo 21
+        curl -i -H "$__PREVIEW__" -H "$__JSON__" -H "Authorization: token $__TOKEN_GITHUB__" -d "$__BODY_KO__" https://api.github.com/repos/$__ORG_DEPLOY__/$FOLDER_URL
+	echo -e " \e[42;1m Runtime ["$_f_"]: $(echo "scale=3;($(date +%s%N) -  ${time})/(1*10^09)" | bc) seconds"	
+#}
+
 ####################################################
 #
 # Copia el repo del origen maestro y lo crea en la cuenta de Destino
 #
 ####################################################
-function __execute__ {	
+#function __execute__ {	
 	echo "__execute__"
 	time=$(date +%s%N)
 	echo $time
@@ -86,24 +99,12 @@ function __execute__ {
 
 	curl -i -H "$__PREVIEW__" -H "$__JSON__" -H "Authorization: token $__TOKEN_GITHUB__" -d "$__BODY_KO__" https://api.github.com/repos/$__ORG_DEPLOY__/$FOLDER_URL
 	echo -e " \e[42;1m Runtime ["$_f_"]: $(echo "scale=3;($(date +%s%N) -  ${time})/(1*10^09)" | bc) seconds"	    	
-}
+#}
 
-function __preExecute__  {
-	echo __execute__
-	time=$(date +%s%N)
-	echo $time
-	_f_="__preExecute__"
-	echo _f_	
-	curl -v -X DELETE -H "Authorization: token '$__TOKEN_GITHUB__'" "https://api.github.com/repos/${ORG_TARGET_IT_RECT}/${NEW_REPO_NAME}"
-	echo 21
-        curl -i -H "$__PREVIEW__" -H "$__JSON__" -H "Authorization: token $__TOKEN_GITHUB__" -d "$__BODY_KO__" https://api.github.com/repos/$__ORG_DEPLOY__/$FOLDER_URL
-	echo -e " \e[42;1m Runtime ["$_f_"]: $(echo "scale=3;($(date +%s%N) -  ${time})/(1*10^09)" | bc) seconds"	
-}
+#function __main__ {
+#    __debug__
+#    __preExecute__
+#    __execute__
+#}
 
-function __main__ {
-    __debug__
-    __preExecute__
-    __execute__
-}
-
-__main__
+#__main__
