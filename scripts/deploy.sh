@@ -1,5 +1,4 @@
- 
-#!/bin/bash
+ #!/bin/bash
 
 ####################################################
 #
@@ -26,7 +25,7 @@ ORG_TARGET=$__ORG_TARGET_IT_RECT__
 # Muestra los valores que vienen como parámetros de la función
 #
 ####################################################
-function  __debug__ {
+function __debug__ {
 	echo "PRINT VALUES"
 	echo ""
 	echo -e "BASE_REPO_NAME:\t\t ${BASE_REPO_NAME}"
@@ -45,8 +44,7 @@ function  __debug__ {
 # Copia el repo del origen maestro y lo crea en la cuenta de Destino
 #
 ####################################################
-function __execute__ {
-	
+function __execute__ {	
 	(set -Ee
 	local time=$(date +%s%N)
 	local _f_=${FUNCNAME[0]}
@@ -79,7 +77,7 @@ function __execute__ {
 
         function _finally {	
             curl -i -H "$__PREVIEW__" -H "$__JSON__" -H "Authorization: token $__TOKEN_GITHUB__" -d "$__BODY_KO__" https://api.github.com/repos/$__ORG_DEPLOY__/$FOLDER_URL
-						      echo -e " \e[42;1m Runtime ["$_f_"]: $(echo "scale=3;($(date +%s%N) -  ${time})/(1*10^09)" | bc) seconds"	
+	    echo -e " \e[42;1m Runtime ["$_f_"]: $(echo "scale=3;($(date +%s%N) -  ${time})/(1*10^09)" | bc) seconds"	
         }
 		
         trap __CATCH__ ERR
@@ -89,8 +87,27 @@ function __execute__ {
 	
 }
 
-function  __preExecute__ {
-    curl -v -X DELETE -H "Authorization: token '$__TOKEN_GITHUB__'" "https://api.github.com/repos/${ORG_TARGET_IT_RECT}/${NEW_REPO_NAME}"
+function __preExecute__  {
+    (set -Ee
+	local time=$(date +%s%N)
+	local _f_=${FUNCNAME[0]}
+        function _try {    
+	    curl -v -X DELETE -H "Authorization: token '$__TOKEN_GITHUB__'" "https://api.github.com/repos/${ORG_TARGET_IT_RECT}/${NEW_REPO_NAME}"
+	} 
+
+        function __CATCH__ {
+            echo "ERROR ***> La ejecucion ${_f_} ha fallado"
+        }
+
+        function _finally {	
+            curl -i -H "$__PREVIEW__" -H "$__JSON__" -H "Authorization: token $__TOKEN_GITHUB__" -d "$__BODY_KO__" https://api.github.com/repos/$__ORG_DEPLOY__/$FOLDER_URL
+	    echo -e " \e[42;1m Runtime ["$_f_"]: $(echo "scale=3;($(date +%s%N) -  ${time})/(1*10^09)" | bc) seconds"	
+        }
+		
+        trap __CATCH__ ERR
+        trap _finally EXIT
+        _try
+    )
 }
 
 function __main__ {
