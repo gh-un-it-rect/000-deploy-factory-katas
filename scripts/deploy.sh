@@ -11,7 +11,7 @@
 ####################################################
 
 MAESTRO="<[^_^]>! => "
-
+echo "  -------------------------------------------------------------   "$1
 BASE_REPO_NAME=$(echo $1 | awk -F'-' '{print $1}')
 TYPE_REPO_NAME=$(echo $1 | awk -F'-' '{print $2}')
 FOLDER_URL=${BASE_REPO_NAME}-${TYPE_REPO_NAME}
@@ -28,8 +28,6 @@ ORG_TARGET=$__ORG_TARGET_IT_RECT__
 ####################################################
 function  __debug__ {
 	echo "PRINT VALUES"
-	echo ""
- 	echo -e "PARAM:\t\t"$1
 	echo ""
 	echo -e "BASE_REPO_NAME:\t\t ${BASE_REPO_NAME}"
 	echo -e "TYPE_REPO_NAME:\t\t ${TYPE_REPO_NAME}"
