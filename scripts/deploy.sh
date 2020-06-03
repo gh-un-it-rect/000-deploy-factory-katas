@@ -1,5 +1,4 @@
  #!/bin/bash
-
 ####################################################
 #
 # Params
@@ -10,11 +9,11 @@
 ####################################################
 
 MAESTRO="<[^_^]>! => "
-echo "  -------------------------------------------------------------   "$1
-BASE_REPO_NAME=$(echo $1 | awk -F'-' '{print $1}')
-TYPE_REPO_NAME=$(echo $1 | awk -F'-' '{print $2}')
+echo "  -------------------------------------------------------------   $1"
+BASE_REPO_NAME=$(echo "$1" | awk -F'-' '{print "$1"}')
+TYPE_REPO_NAME=$(echo "$1" | awk -F'-' '{print "$2"}')
 FOLDER_URL=${BASE_REPO_NAME}-${TYPE_REPO_NAME}
-NEW_REPO_NAME=$1
+NEW_REPO_NAME="$1"
 URL_MASTER=https://github.com/${__ORG_DEPLOY__}/${FOLDER_URL}.git
 COMMIT="Reset Repo"
 ORG_TARGET=$__ORG_TARGET_IT_RECT__
@@ -45,10 +44,10 @@ function __debug__ {
 #
 ####################################################
 function __execute__ {	
-	echo __execute__
+	echo "__execute__"
 	time=$(date +%s%N)
 	echo $time
-	_f_=${FUNCNAME[0]}
+	_f_="__execute__"
 	echo _f_
 	curl -i -H "$__PREVIEW__" -H "$__JSON__" -H "Authorization: token $__TOKEN_GITHUB__" -d "$__BODY_OK__" https://api.github.com/repos/$__ORG_DEPLOY__/$FOLDER_URL
 	echo 2
@@ -93,7 +92,7 @@ function __preExecute__  {
 	echo __execute__
 	time=$(date +%s%N)
 	echo $time
-	_f_=${FUNCNAME[0]}
+	_f_="__preExecute__"
 	echo _f_	
 	curl -v -X DELETE -H "Authorization: token '$__TOKEN_GITHUB__'" "https://api.github.com/repos/${ORG_TARGET_IT_RECT}/${NEW_REPO_NAME}"
 	echo 21
