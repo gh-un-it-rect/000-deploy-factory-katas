@@ -42,7 +42,7 @@ COMMIT="Reset Repo"
 	_f_="__preExecute__"
 	echo $_f_	
 	curl -v -X DELETE -H "Authorization: token $__TOKEN_GITHUB__" https://api.github.com/repos/${__ORG_TARGET_IT_RECT__}/${NEW_REPO_NAME}
-	echo -e " \e[42;1m Runtime ["$_f_"]: $(echo "scale=3;($(date +%s%N) -  ${time})/(1*10^09)" | bc) seconds"	
+	echo -e "\e[42;1m Runtime ["$_f_"]: $(echo "scale=3;($(date +%s%N) -  ${time})/(1*10^09)" | bc) seconds"	
 #}
 
 ####################################################
