@@ -29,7 +29,7 @@ ORG_TARGET=$__ORG_TARGET_IT_RECT__
 function  __debug__ {
 	echo "PRINT VALUES"
 	echo ""
- echo -e "PARAM:\t\t"$1
+ 	echo -e "PARAM:\t\t"$1
 	echo ""
 	echo -e "BASE_REPO_NAME:\t\t ${BASE_REPO_NAME}"
 	echo -e "TYPE_REPO_NAME:\t\t ${TYPE_REPO_NAME}"
@@ -39,7 +39,7 @@ function  __debug__ {
 	echo -e "URL_MASTER:\t\t ${URL_MASTER}"
 	echo -e "COMMIT:\t\t\t ${COMMIT}"
 	echo -e "FOLDER_URL:\t\t ${FOLDER_URL}"
- echo -e "ORG_TARGET:\t\t ${ORG_TARGET}"
+ 	echo -e "ORG_TARGET:\t\t ${ORG_TARGET}"
 	echo ""
 	
 }
