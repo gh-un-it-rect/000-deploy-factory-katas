@@ -45,69 +45,60 @@ function __debug__ {
 #
 ####################################################
 function __execute__ {	
-	(set -Ee
-	local time=$(date +%s%N)
-	local _f_=${FUNCNAME[0]}
-        function _try {     
-            curl -i -H "$__PREVIEW__" -H "$__JSON__" -H "Authorization: token $__TOKEN_GITHUB__" -d "$__BODY_OK__" https://api.github.com/repos/$__ORG_DEPLOY__/$FOLDER_URL
+	echo __execute__
+	time=$(date +%s%N)
+	echo $time
+	_f_=${FUNCNAME[0]}
+	echo _f_
+	curl -i -H "$__PREVIEW__" -H "$__JSON__" -H "Authorization: token $__TOKEN_GITHUB__" -d "$__BODY_OK__" https://api.github.com/repos/$__ORG_DEPLOY__/$FOLDER_URL
+	echo 2
+	curl -v -H "Authorization: token '${__TOKEN_GITHUB__}'" https://api.github.com/orgs/${ORG_TARGET_IT_RECT}/repos -d '{"name": "'"${NEW_REPO_NAME}"'"}' 
+	echo 3
+	git clone ${URL_MASTER} 
+	echo 4
+	rm -Rf  ${NEW_REPO_NAME}
+	echo 5
+	mv ${FOLDER_URL} ${NEW_REPO_NAME}
+	echo 6
+	cd ${NEW_REPO_NAME}
+	echo 7
+	rm -Rf .git 
+	echo 8
+	git init 
+	echo 9
+	git add -A  
+	echo 10
+	git remote add origin https://$__TOKEN_GITHUB__@github.com/${ORG_TARGET_IT_RECT}/${NEW_REPO_NAME}.git 
+	echo 11
+	git commit -m "${COMMIT}"
+	echo 12
+	git push --quiet --set-upstream origin master 
+	echo 13
+	git checkout -b develop 
+	echo 14
+	git push --quiet --set-upstream origin develop 
+	echo 15
+	git checkout -b test
+	echo 16
+	git push --quiet --set-upstream origin test 
+	echo 17
 
-            curl -v -H "Authorization: token '${__TOKEN_GITHUB__}'" https://api.github.com/orgs/${ORG_TARGET_IT_RECT}/repos -d '{"name": "'"${NEW_REPO_NAME}"'"}' 
+	echo -e " \e[42;1m ${MAESTRO} Ejecución satisfactoria ${NEW_REPO_NAME}"
 
-            git clone ${URL_MASTER} 
-            rm -Rf  ${NEW_REPO_NAME}
-            mv ${FOLDER_URL} ${NEW_REPO_NAME}
-            cd ${NEW_REPO_NAME}
-            rm -Rf .git 
-            git init 
-            git add -A  
-            git remote add origin https://$__TOKEN_GITHUB__@github.com/${ORG_TARGET_IT_RECT}/${NEW_REPO_NAME}.git 
-            git commit -m "${COMMIT}" 
-            git push --quiet --set-upstream origin master 
-            git checkout -b develop 
-            git push --quiet --set-upstream origin develop 
-            git checkout -b test 
-            git push --quiet --set-upstream origin test 
-      
-            echo -e " \e[42;1m ${MAESTRO} Ejecución satisfactoria ${NEW_REPO_NAME}"
-        } 
-
-        function __CATCH__ {
-            echo "ERROR ***> La ejecucion ${_f_} ha fallado"
-        }
-
-        function _finally {	
-            curl -i -H "$__PREVIEW__" -H "$__JSON__" -H "Authorization: token $__TOKEN_GITHUB__" -d "$__BODY_KO__" https://api.github.com/repos/$__ORG_DEPLOY__/$FOLDER_URL
-	    echo -e " \e[42;1m Runtime ["$_f_"]: $(echo "scale=3;($(date +%s%N) -  ${time})/(1*10^09)" | bc) seconds"	
-        }
-		
-        trap __CATCH__ ERR
-        trap _finally EXIT
-        _try
-    )
-	
+	curl -i -H "$__PREVIEW__" -H "$__JSON__" -H "Authorization: token $__TOKEN_GITHUB__" -d "$__BODY_KO__" https://api.github.com/repos/$__ORG_DEPLOY__/$FOLDER_URL
+	echo -e " \e[42;1m Runtime ["$_f_"]: $(echo "scale=3;($(date +%s%N) -  ${time})/(1*10^09)" | bc) seconds"	    	
 }
 
 function __preExecute__  {
-    (set -Ee
-	local time=$(date +%s%N)
-	local _f_=${FUNCNAME[0]}
-        function _try {    
-	    curl -v -X DELETE -H "Authorization: token '$__TOKEN_GITHUB__'" "https://api.github.com/repos/${ORG_TARGET_IT_RECT}/${NEW_REPO_NAME}"
-	} 
-
-        function __CATCH__ {
-            echo "ERROR ***> La ejecucion ${_f_} ha fallado"
-        }
-
-        function _finally {	
-            curl -i -H "$__PREVIEW__" -H "$__JSON__" -H "Authorization: token $__TOKEN_GITHUB__" -d "$__BODY_KO__" https://api.github.com/repos/$__ORG_DEPLOY__/$FOLDER_URL
-	    echo -e " \e[42;1m Runtime ["$_f_"]: $(echo "scale=3;($(date +%s%N) -  ${time})/(1*10^09)" | bc) seconds"	
-        }
-		
-        trap __CATCH__ ERR
-        trap _finally EXIT
-        _try
-    )
+	echo __execute__
+	time=$(date +%s%N)
+	echo $time
+	_f_=${FUNCNAME[0]}
+	echo _f_	
+	curl -v -X DELETE -H "Authorization: token '$__TOKEN_GITHUB__'" "https://api.github.com/repos/${ORG_TARGET_IT_RECT}/${NEW_REPO_NAME}"
+	echo 21
+        curl -i -H "$__PREVIEW__" -H "$__JSON__" -H "Authorization: token $__TOKEN_GITHUB__" -d "$__BODY_KO__" https://api.github.com/repos/$__ORG_DEPLOY__/$FOLDER_URL
+	echo -e " \e[42;1m Runtime ["$_f_"]: $(echo "scale=3;($(date +%s%N) -  ${time})/(1*10^09)" | bc) seconds"	
 }
 
 function __main__ {
