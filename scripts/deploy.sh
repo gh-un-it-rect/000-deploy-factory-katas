@@ -9,7 +9,6 @@
 ####################################################
 
 MAESTRO="<[^_^]>! => "
-echo "  -------------------------------------------------------------   $1"
 BASE_REPO_NAME=$(echo "$1" | awk -F'-' '{print $1}')
 TYPE_REPO_NAME=$(echo "$1" | awk -F'-' '{print $2}')
 FOLDER_URL=${BASE_REPO_NAME}-${TYPE_REPO_NAME}
@@ -44,7 +43,7 @@ ORG_TARGET=$__ORG_TARGET_IT_RECT__
 	echo $time
 	_f_="__preExecute__"
 	echo $_f_	
-	curl -v -X DELETE -H "Authorization: token $__TOKEN_GITHUB__" "https://api.github.com/repos/${ORG_TARGET_IT_RECT}/${NEW_REPO_NAME}"
+	curl -v -X DELETE -H "Authorization: token $__TOKEN_GITHUB__" https://api.github.com/repos/${ORG_TARGET_IT_RECT}/${NEW_REPO_NAME}
 	echo -e " \e[42;1m Runtime ["$_f_"]: $(echo "scale=3;($(date +%s%N) -  ${time})/(1*10^09)" | bc) seconds"	
 #}
 
