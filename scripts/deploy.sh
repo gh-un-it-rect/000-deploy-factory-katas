@@ -39,10 +39,7 @@ function  __debug__ {
 	echo -e "FOLDER_URL:\t\t ${FOLDER_URL}"
  	echo -e "ORG_TARGET:\t\t ${ORG_TARGET}"
 	echo ""
-	
 }
-
-
 ####################################################
 #
 # Copia el repo del origen maestro y lo crea en la cuenta de Destino
