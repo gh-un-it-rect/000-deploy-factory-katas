@@ -5,7 +5,7 @@
 # $1 = Nombre del Repositorio + Candidato
 #
 # Ejemplo
-# sh deploy.sh '100-tj-XXXX'
+# sh deploy.sh 'hashing -aes-256-'
 ####################################################
 
 MAESTRO="<[^_^]>! => "
