@@ -10,6 +10,7 @@
 
 MAESTRO="<[^_^]>! => "
 echo "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+openssl version
 pwd
 ls -ltra
 chmod +x cipher-decrypt.sh
