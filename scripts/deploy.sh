@@ -9,17 +9,8 @@
 ####################################################
 
 MAESTRO="<[^_^]>! => "
-echo "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-openssl version
-pwd
-ls -ltra
 chmod +x cipher-decrypt.sh
-ls -ltra
-echo $1
-echo $__CIPHER_KEY__
-NEW_REPO_NAME=echo $(echo 'bGludXhoaW50LmNvbQo=' | base64 --decode)
-echo "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-
+NEW_REPO_NAME=echo $(echo $1| base64 --decode)
 BASE_REPO_NAME=$(echo "$NEW_REPO_NAME" | awk -F'-' '{print $1}')
 if [ "$NEW_REPO_NAME" = "echo" ]; then
      exit -1
