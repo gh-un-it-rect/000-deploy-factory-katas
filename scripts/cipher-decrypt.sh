@@ -1,1 +1,1 @@
-echo $1 | openssl enc -aes-256-cbc -md sha512 -a -d -salt -pass pass:$2
+echo $1 | openssl enc -aes-256-cbc -md sha256 -a -d -salt -pass pass:$2
