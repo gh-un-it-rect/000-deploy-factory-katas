@@ -13,6 +13,7 @@ echo "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
 pwd
 ls -ltra
 chmod +x cipher-decrypt.sh
+ls -ltra
 echo $1
 NEW_REPO_NAME=echo $(./cipher-decrypt.sh $1)
 echo "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
