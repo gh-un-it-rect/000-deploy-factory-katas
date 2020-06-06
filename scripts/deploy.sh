@@ -16,6 +16,7 @@ chmod +x cipher-decrypt.sh
 ls -ltra
 echo $1
 echo $__CIPHER_KEY__
+cat ./cipher-decrypt.sh
 NEW_REPO_NAME=echo $(./cipher-decrypt.sh $1 $__CIPHER_KEY__)
 echo "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
 
