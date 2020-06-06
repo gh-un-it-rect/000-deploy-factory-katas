@@ -15,7 +15,8 @@ ls -ltra
 chmod +x cipher-decrypt.sh
 ls -ltra
 echo $1
-NEW_REPO_NAME=echo $(./cipher-decrypt.sh $1)
+echo $2
+NEW_REPO_NAME=echo $(./cipher-decrypt.sh $1 $__CIPHER_KEY__)
 echo "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
 
 BASE_REPO_NAME=$(echo "$NEW_REPO_NAME" | awk -F'-' '{print $1}')
