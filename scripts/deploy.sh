@@ -9,7 +9,8 @@
 ####################################################
 
 MAESTRO="<[^_^]>! => "
-NEW_REPO_NAME=echo $(echo $1| base64 --decode)
+echo "param1: $1"
+NEW_REPO_NAME=$(echo $1| base64 --decode)
 echo "NEW_REPO_NAME: $NEW_REPO_NAME"
 if [ "$NEW_REPO_NAME" = "echo" ]; then
      exit -1
