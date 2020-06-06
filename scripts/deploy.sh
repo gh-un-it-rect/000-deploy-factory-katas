@@ -9,24 +9,23 @@
 ####################################################
 
 MAESTRO="<[^_^]>! => "
-echo "param1: $1"
-NEW_REPO_NAME=$(echo $1| base64 --decode)
-echo "NEW_REPO_NAME: $NEW_REPO_NAME"
+NEW_REPO_NAME=$(echo $1 | base64 --decode)
+#echo "NEW_REPO_NAME: $NEW_REPO_NAME"
 if [ "$NEW_REPO_NAME" = "echo" ]; then
      exit -1
 fi
 
 BASE_REPO_NAME=$(echo "$NEW_REPO_NAME" | awk -F'-' '{print $1}')
-echo "BASE_REPO_NAME: $BASE_REPO_NAME"
+#echo "BASE_REPO_NAME: $BASE_REPO_NAME"
 
 TYPE_REPO_NAME=$(echo "$NEW_REPO_NAME" | awk -F'-' '{print $2}')
-echo "TYPE_REPO_NAME: $TYPE_REPO_NAME"
+#echo "TYPE_REPO_NAME: $TYPE_REPO_NAME"
 
 FOLDER_URL=${BASE_REPO_NAME}-${TYPE_REPO_NAME}
-echo "FOLDER_URL: $FOLDER_URL"
+#echo "FOLDER_URL: $FOLDER_URL"
 
 URL_MASTER=https://github.com/${__ORG_DEPLOY__}/${FOLDER_URL}.git
-echo "URL_MASTER: $URL_MASTER"
+#echo "URL_MASTER: $URL_MASTER"
 
 COMMIT="Reset Repo"
 
