@@ -18,6 +18,10 @@ NEW_REPO_NAME=echo $(./cipher-decrypt.sh $1)
 echo "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
 
 BASE_REPO_NAME=$(echo "$NEW_REPO_NAME" | awk -F'-' '{print $1}')
+[ ! -z "$NEW_REPO_NAME" ]; then
+   exit -1
+fi
+
 TYPE_REPO_NAME=$(echo "$NEW_REPO_NAME" | awk -F'-' '{print $2}')
 FOLDER_URL=${BASE_REPO_NAME}-${TYPE_REPO_NAME}
 URL_MASTER=https://github.com/${__ORG_DEPLOY__}/${FOLDER_URL}.git
