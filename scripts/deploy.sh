@@ -19,10 +19,6 @@ NEW_REPO_NAME=echo $(./cipher-decrypt.sh $1)
 echo "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
 
 BASE_REPO_NAME=$(echo "$NEW_REPO_NAME" | awk -F'-' '{print $1}')
-if[ ! -z "$NEW_REPO_NAME" ]; then
-   exit -1
-fi
-
 if [ "$NEW_REPO_NAME" = "echo" ]; then
      exit -1
 fi
