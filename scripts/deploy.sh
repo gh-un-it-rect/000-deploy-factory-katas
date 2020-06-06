@@ -9,13 +9,17 @@
 ####################################################
 
 MAESTRO="<[^_^]>! => "
-BASE_REPO_NAME=$(echo "$1" | awk -F'-' '{print $1}')
-TYPE_REPO_NAME=$(echo "$1" | awk -F'-' '{print $2}')
-FOLDER_URL=${BASE_REPO_NAME}-${TYPE_REPO_NAME}
+echo "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
 pwd
 ls -ltra
 chmod +x cipher-decrypt.sh
-NEW_REPO_NAME=echo $(cipher-decrypt.sh $1)
+echo $1
+NEW_REPO_NAME=echo $(./cipher-decrypt.sh $1)
+echo "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+
+BASE_REPO_NAME=$(echo "$NEW_REPO_NAME" | awk -F'-' '{print $1}')
+TYPE_REPO_NAME=$(echo "$NEW_REPO_NAME" | awk -F'-' '{print $2}')
+FOLDER_URL=${BASE_REPO_NAME}-${TYPE_REPO_NAME}
 URL_MASTER=https://github.com/${__ORG_DEPLOY__}/${FOLDER_URL}.git
 COMMIT="Reset Repo"
 
