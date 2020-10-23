@@ -18,10 +18,13 @@ fi
 BASE_REPO_NAME=$(echo "$NEW_REPO_NAME" | awk -F'-' '{print $1}')
 #echo "BASE_REPO_NAME: $BASE_REPO_NAME"
 
-TYPE_REPO_NAME=$(echo "$NEW_REPO_NAME" | awk -F'-' '{print $2}')
-#echo "TYPE_REPO_NAME: $TYPE_REPO_NAME"
+TYPE_REPO_LEVEL=$(echo "$NEW_REPO_NAME" | awk -F'-' '{print $2}')
+#echo "TYPE_REPO_LEVEL: $TYPE_REPO_LEVEL"
 
-FOLDER_URL=${BASE_REPO_NAME}-${TYPE_REPO_NAME}
+TYPE_REPO_LANG=$(echo "$NEW_REPO_NAME" | awk -F'-' '{print $3}')
+#echo "TYPE_REPO_LANG: $TYPE_REPO_LANG
+
+FOLDER_URL=${BASE_REPO_NAME}-${TYPE_REPO_LEVEL}-${TYPE_REPO_LANG}
 #echo "FOLDER_URL: $FOLDER_URL"
 
 URL_MASTER=https://github.com/${__ORG_DEPLOY__}/${FOLDER_URL}.git
@@ -38,7 +41,8 @@ COMMIT="Reset Repo"
 	echo "PRINT VALUES"
 	echo ""
 	echo -e "BASE_REPO_NAME:\t\t ${BASE_REPO_NAME}"
-	echo -e "TYPE_REPO_NAME:\t\t ${TYPE_REPO_NAME}"
+	echo -e "TYPE_REPO_LEVEL:\t\t ${TYPE_REPO_LEVEL}"
+	echo -e "TYPE_REPO_LANG:\t\t ${TYPE_REPO_LANG}"
 	echo -e "NEW_REPO_NAME:\t\t ${NEW_REPO_NAME}"
 	echo ""
 	echo -e "TOKEN_GITHUB:\t\t ${__TOKEN_GITHUB__}"
