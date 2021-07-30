@@ -77,11 +77,12 @@ COMMIT="Reset Repo"
 	git add -A  
 	git remote add origin https://$__TOKEN_GITHUB__@github.com/${__ORG_TARGET_IT_RECT__}/${NEW_REPO_NAME}.git 
 	git commit -m "${COMMIT}"
-	git push --quiet --set-upstream origin master 
-	git checkout -b develop 
-	git push --quiet --set-upstream origin develop 
-	git checkout -b test
-	git push --quiet --set-upstream origin test 
+	git checkout -b main
+	git push --quiet --set-upstream origin main 
+	#git checkout -b develop 
+	#git push --quiet --set-upstream origin develop 
+	#git checkout -b test
+	#git push --quiet --set-upstream origin test 
 	
 	echo -e " \e[42;1m ${MAESTRO} Ejecución satisfactoria ${NEW_REPO_NAME}"
 
